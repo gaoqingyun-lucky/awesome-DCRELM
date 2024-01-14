@@ -32,28 +32,6 @@ def bioDataload(dataset_name):
             init_center_index[i] = k[0]
         return Total_data, Total_label, init_center_index, cluster_num
 
-
-def generateAdj(featureMatrix, distanceType='euclidean', k=10):
-    def Dataload(dataset_name):
-
-        if dataset_name == 'Muraro':
-            path = '../../biodata/{}/{}_lable.csv'.format(dataset_name, dataset_name)
-            path1 = '../../biodata/{}/{}_count.csv'.format(dataset_name, dataset_name)
-            data = pd.read_csv(path)
-            data1 = pd.read_csv(path1)
-            Total_label = np.array(data['x'])  # the label of each cell
-            x1 = np.array(data1)
-            Total_data = np.delete(x1, 0, 1)  # the features of each cell
-            cluster_name = np.unique(Total_label)
-            cluster_num = cluster_name.size
-            init_center_index = np.zeros(cluster_num, dtype=int)
-            for i in np.arange(cluster_num):  # label preprocessing
-                k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-                Total_label[k] = i
-                init_center_index[i] = k[0]
-            return Total_data.T, Total_label, init_center_index, cluster_num
-
-
 def normalize_adj(adj, self_loop=True, symmetry=False):
     """
     normalize the adj matrix
