@@ -106,10 +106,8 @@ if __name__ == '__main__':
     args.nk = 5#the neighbor of cells
     args.graph_k_save_path = './DCRN_pretrain/graph/{}{}_graph.txt'.format(args.name, args.nk)
     args.graph_save_path = './DCRN_pretrain/graph/{}_graph.txt'.format(args.name)
-    # args.n_input = 10
     torch.set_default_dtype(torch.float32)
-    # Bio_data
-    #导入数据
+    # load data
     X, label, init_center_index, cluster_num = bioDataload(args.name)
     y = label.astype(int)
     args.n_clusters = cluster_num
@@ -119,7 +117,6 @@ if __name__ == '__main__':
     A_norm = normalize_adj(A, self_loop=True, symmetry=True)
     Ad = diffusion_adj(torch_to_numpy(A.detach().cpu()), mode="ppr", transport_rate=opt.args.alpha_value)
     ELM_hidden = [50,100, 200, 500, 1000, 1500, 2000]
-    # ELM_hidden = [1500]#换100, 200, 500, 1000, 1500, 2000
     elmacc = float('-inf')
     elmnmi = float('-inf')
     elmari = float('-inf')
