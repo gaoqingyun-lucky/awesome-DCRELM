@@ -21,7 +21,7 @@ def ELM_train(model, X, y, A, A_norm, Ad, init_center_index):
     sim, centers = ELM_model_init(X, y, init_center_index)
 
     # initialize cluster centers
-    model.cluster_centers.data = torch.tensor(centers).to(opt.args.device)#类簇中心矩阵
+    model.cluster_centers.data = torch.tensor(centers).to(opt.args.device)
 
     # edge-masked adjacency matrix (Am): remove edges based on feature-similarity
     Am = remove_edge(A, sim, remove_rate=0.1)
@@ -33,13 +33,13 @@ def ELM_train(model, X, y, A, A_norm, Ad, init_center_index):
     best_ari_y = torch.Tensor().to(opt.args.device)
     best_f1_Z = torch.Tensor().to(opt.args.device)
     best_f1_y = torch.Tensor().to(opt.args.device)
-    optimizer = Adam(model.parameters(), lr=opt.args.lr)#模型求解器
-    for epoch in tqdm.tqdm(range(opt.args.epoch)):#epoch一个训练周期
+    optimizer = Adam(model.parameters(), lr=opt.args.lr)
+    for epoch in tqdm.tqdm(range(opt.args.epoch)):
         # add gaussian noise to X
         X_tilde1, X_tilde2 = gaussian_noised_feature(X)
 
         # input & output
-        X_hat, Z_hat, A_hat, _, Z_ae_all, Z_gae_all, Q, Z, AZ_all, Z_all = model(X_tilde1, Ad, X_tilde2, Am)#模型输出结果
+        X_hat, Z_hat, A_hat, _, Z_ae_all, Z_gae_all, Q, Z, AZ_all, Z_all = model(X_tilde1, Ad, X_tilde2, Am)
 
         # calculate loss: L_{DICR}, L_{REC} and L_{KL}
         L_DICR = dicr_loss(Z_ae_all, Z_gae_all, AZ_all, Z_all)
@@ -54,7 +54,7 @@ def ELM_train(model, X, y, A, A_norm, Ad, init_center_index):
 
         # clustering & evaluation
         with torch.no_grad():
-            acc, nmi, ari, f1, _ = clustering(Z, y, init_center_index)#k-means聚类，Z最终的cell特征，y为每个cell的类簇标签
+            acc, nmi, ari, f1, _ = clustering(Z, y, init_center_index)
             if acc > opt.args.acc:
                 opt.args.acc = acc
                 best_acc_Z = Z
