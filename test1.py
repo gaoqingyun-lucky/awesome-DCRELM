@@ -50,11 +50,6 @@ def bioDataload(dataset_name):
         return Total_data, Total_label, init_center_index, cluster_num
 
 
-
-
-
-
-
 def generateAdj(featureMatrix, distanceType='euclidean', k=10):
     def Dataload(dataset_name):
 
@@ -106,8 +101,6 @@ def normalize_adj(adj, self_loop=True, symmetry=False):
     return norm_adj
 
 if __name__ == '__main__':
-    # setup0
-    # setup()
     opt.args.device = torch.device("cuda" if opt.args.cuda else "cpu")
     args.name = 'lawor'#dataset_num
     args.nk = 5#the neighbor of cells
@@ -156,11 +149,8 @@ if __name__ == '__main__':
     args.n_components = args.n_input
     args.n_z = args.n_input
     args.epoch = 2000
-    # H = ELM(X, n_hidden=args.n_input, active_fun='sigmod')
     HX = best_ari_H.to(opt.args.device)  # H(X) #best_H, best_nmi_H, best_ari_H, best_f1_H
-    # A_norm = numpy_to_torch(A_norm, sparse=True).to(opt.args.device)
     Ad = numpy_to_torch(Ad).to(opt.args.device)  
-
     embeding_size_set = [128,256,512,1024,2048]
     accc = float('-inf')
     f11 = float('-inf')
@@ -172,7 +162,6 @@ if __name__ == '__main__':
     best_nmi_embeding_size = 0
     for embeding_size in embeding_size_set:
         print('embeding_size: {}'.format(embeding_size))
-
         args.ae_n_enc_1 = embeding_size
         args.ae_n_enc_2 = embeding_size
         args.ae_n_enc_3 = embeding_size
@@ -185,7 +174,6 @@ if __name__ == '__main__':
         args.gae_n_dec_1 = args.n_input
         args.gae_n_dec_2 = embeding_size
         args.gae_n_dec_3 = embeding_size
-
         model = DCRN(n_node=HX.shape[0]).to(opt.args.device)
         # deep graph clustering
         acc, nmi, ari, f1 = ELM_train(model, HX, y, torch_to_numpy(A.detach().cpu()), A_norm, Ad, init_center_index)
