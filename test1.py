@@ -48,217 +48,9 @@ def bioDataload(dataset_name):
             Total_label[k] = i
             init_center_index[i] = k[0]
         return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Bmcite':
-        path = '../biodata/{}/{}_lable.csv'.format(dataset_name,dataset_name)
-        path1 = '../biodata/{}/{}_count.csv'.format(dataset_name,dataset_name)
-        data = pd.read_csv(path)
-        data1 = pd.read_csv(path1)
-        Total_label = np.array(data['x']) # the label of each cell
-        x1 = np.array(data1)
-        Total_data = np.delete(x1, 0, 1)
-        cluster_name = np.unique(Total_label)
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data.T.astype(float), Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Yeo':
-        file = '../../../biodata/{}.mat'.format(dataset_name)
-        # mat_dtype=True，保证了导入后变量的数据类型与原类型一致。
-        data = loadmat(file, mat_dtype=True)
-        t = data['true_labs'].reshape(-1)
-        Total_label = data['true_labs'].reshape(-1).astype(int) # the label of each cell
-        Total_data = data['in_X'].astype(float)
-        cluster_name = np.unique(data['true_labs'])
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'pomeroy':
-        file = '../../../biodata/{}.mat'.format(dataset_name)
-        # mat_dtype=True，保证了导入后变量的数据类型与原类型一致。
-        data = loadmat(file, mat_dtype=True)
-        t = data['true_labs'].reshape(-1)
-        Total_label = data['true_labs'].reshape(-1).astype(int) # the label of each cell
-        Total_data = data['in_X'].astype(float)
-        cluster_name = np.unique(data['true_labs'])
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Chung':
-        file = '../../../biodata/{}.mat'.format(dataset_name)
-        # mat_dtype=True，保证了导入后变量的数据类型与原类型一致。
-        data = loadmat(file, mat_dtype=True)
-        t = data['true_labs'].reshape(-1)
-        Total_label = data['true_labs'].reshape(-1).astype(int) # the label of each cell
-        Total_data = data['in_X'].astype(float)
-        cluster_name = np.unique(data['true_labs'])
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Ning':
-        file = '../../../biodata/{}.mat'.format(dataset_name)
-        # mat_dtype=True，保证了导入后变量的数据类型与原类型一致。
-        data = loadmat(file, mat_dtype=True)
-        t = data['true_labs'].reshape(-1)
-        Total_label = data['true_labs'].reshape(-1).astype(int) # the label of each cell
-        Total_data = data['in_X'].astype(float)
-        cluster_name = np.unique(data['true_labs'])
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Test_human':
-        file = '../../../biodata/{}.mat'.format(dataset_name)
-        # mat_dtype=True，保证了导入后变量的数据类型与原类型一致。
-        data = loadmat(file, mat_dtype=True)
-        t = data['true_labs'].reshape(-1)
-        Total_label = data['true_labs'].reshape(-1).astype(int) # the label of each cell
-        Total_data = data['in_X'].astype(float)
-        cluster_name = np.unique(data['true_labs'])
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Test_1_Zeisel_big':
-        file = '../../../biodata/{}.mat'.format(dataset_name)
-        # mat_dtype=True，保证了导入后变量的数据类型与原类型一致。
-        data = loadmat(file, mat_dtype=True)
-        # t = data['true_labs'].reshape(-1)
-        Total_label = data['true_labs'].reshape(-1).astype(int) # the label of each cell
-        Total_data = data['in_X'].A.astype(float)
-        cluster_name = np.unique(data['true_labs'])
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'Camp1':
-        path = '../../../biodata/{}'.format(dataset_name)
-        # path = '../../../../../biodata/Camp1'
-        data = []
-        file = open(path, 'r')  # 打开文件
-        file_data = file.readlines()  # 读取所有行
-        for row in file_data:
-            tmp_list = row.split('\t')  # 按‘，’切分每行的数据
-            # tmp_list[-1] = tmp_list[-1].replace('\n',',') #去掉换行符
-            data.append(tmp_list)  # 将每行数据插入data中
-        data = np.array(data)
-        data1 = np.delete(data, 0, 0)
-        Total_data = data1[:, 1:-1]
-        Total_label = data1[:, -1]
-        cluster_name = np.unique(Total_label)
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data.astype(float), Total_label.astype(int), init_center_index, cluster_num
-    elif dataset_name == 'kolo':
-        path = '../../../biodata/{}/{}_lable.csv'.format(dataset_name, dataset_name)
-        path1 = '../../../biodata/{}/{}_pre.csv'.format(dataset_name, dataset_name)
-        data = pd.read_csv(path)
-        data1 = pd.read_csv(path1, header=None)
-        Total_label = np.array(data['x'])  # the label of each cell
-        Total_data = np.array(data1).astype(float)
-        cluster_name = np.unique(Total_label)
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data.astype(float), Total_label.astype(int), init_center_index, cluster_num
-    elif dataset_name == 'Klein':
-        path = '../../../biodata/{}/{}_cell_label.csv'.format(dataset_name, dataset_name)
-        path1 = '../../../biodata/{}/T2000_expression.txt'.format(dataset_name)
-        data = pd.read_csv(path)
-        data1 = []
-        file = open(path1, 'r')  # 打开文件
-        file_data = file.readlines()  # 读取所有行
-        for row in file_data:
-            tmp_list = row.split('\t')  # 按‘，’切分每行的数据
-            # tmp_list[-1] = tmp_list[-1].replace('\n',',') #去掉换行符
-            data1.append(tmp_list)  # 将每行数据插入data中
-        data1 = np.array(data1)
-        data1 = np.delete(data1, 0, 0)
-        data1 = np.delete(data1, 0, 1)
-        # data1 = pd.read_csv(path1,header=None)
-        Total_label = np.array(data['Cluster']).astype(int)  # the label of each cell
-        Total_data = np.array(data1).astype(float).T
-        cluster_name = np.unique(Total_label)
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data.astype(float), Total_label.astype(int), init_center_index, cluster_num
-    elif dataset_name == 'Kolodziejczyk':
-        path = '../../../biodata/{}/{}_cell_label.csv'.format(dataset_name, dataset_name)
-        path1 = '../../../biodata/{}/T2000_expression.txt'.format(dataset_name)
-        data = pd.read_csv(path)
-        data1 = []
-        file = open(path1, 'r')  # 打开文件
-        file_data = file.readlines()  # 读取所有行
-        for row in file_data:
-            tmp_list = row.split('\t')  # 按‘，’切分每行的数据
-            # tmp_list[-1] = tmp_list[-1].replace('\n',',') #去掉换行符
-            data1.append(tmp_list)  # 将每行数据插入data中
-        data1 = np.array(data1)
-        data1 = np.delete(data1, 0, 0)
-        data1 = np.delete(data1, 0, 1)
-        # data1 = pd.read_csv(path1,header=None)
-        Total_label = np.array(data['Cluster']).astype(int)  # the label of each cell
-        Total_data = np.array(data1).astype(float).T
-        cluster_name = np.unique(Total_label)
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
-    elif dataset_name == 'BEAM':
-        path = r'../../../biodata/BEAM-Ab_Mouse_HEL/cluster_label.csv'
-        path1 = r'../../../biodata/BEAM-Ab_Mouse_HEL/matrix.mtx'
-        dataset = scipy.io.mmread(path1)
-        # adata = sc.read(path1)
-        # dataset = adata.X
-        Total_data = np.array(dataset.todense()).astype(float).T
-        Cluster_label = pd.read_csv(path)
-        Total_label = np.array(Cluster_label['Cluster']).astype(int)
-        Total_label = Total_label -1
-        cluster_name = np.unique(Total_label)
-        cluster_num = cluster_name.size
-        init_center_index = np.zeros(cluster_num, dtype=int)
-        for i in np.arange(cluster_num):  # label preprocessing-
-            k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-            # Total_label[k] = i
-            init_center_index[i] = k[0]
-        return Total_data, Total_label, init_center_index, cluster_num
+
+
+
 
 
 
@@ -282,105 +74,7 @@ def generateAdj(featureMatrix, distanceType='euclidean', k=10):
                 Total_label[k] = i
                 init_center_index[i] = k[0]
             return Total_data.T, Total_label, init_center_index, cluster_num
-        elif dataset_name == 'Biase':
-            path = '../../biodata/{}/{}_lable.csv'.format(dataset_name, dataset_name)
-            path1 = '../../biodata/{}/{}_count.csv'.format(dataset_name, dataset_name)
-            data = pd.read_csv(path)
-            data1 = pd.read_csv(path1, header=None)
-            Total_label = np.array(data['x'])  # the label of each cell
-            Total_data = np.array(data1).astype(float)
-            cluster_name = np.unique(Total_label)
-            cluster_num = cluster_name.size
-            init_center_index = np.zeros(cluster_num, dtype=int)
-            for i in np.arange(cluster_num):  # label preprocessing
-                k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-                Total_label[k] = i
-                init_center_index[i] = k[0]
-            return Total_data, Total_label, init_center_index, cluster_num
-        elif dataset_name == 'Chung':
-            path = '../../../../../biodata/{}'.format(dataset_name)
-            # path = '../../../../../biodata/Camp1'
-            data = []
-            file = open(path, 'r')  # 打开文件
-            file_data = file.readlines()  # 读取所有行
-            for row in file_data:
-                tmp_list = row.split('\t')  # 按‘，’切分每行的数据
-                # tmp_list[-1] = tmp_list[-1].replace('\n',',') #去掉换行符
-                data.append(tmp_list)  # 将每行数据插入data中
-            data = np.array(data)
-            data1 = np.delete(data, 0, 0)
-            Total_data = data1[:, 1:-1]
-            Total_label = data1[:, -1]
-            cluster_name = np.unique(Total_label)
-            cluster_num = cluster_name.size
-            init_center_index = np.zeros(cluster_num, dtype=int)
-            for i in np.arange(cluster_num):  # label preprocessing
-                k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-                Total_label[k] = i
-                init_center_index[i] = k[0]
-            return Total_data, Total_label, init_center_index, cluster_num
-        elif dataset_name == 'kolo':
-            path = '../../../../../biodata/{}/{}_lable.csv'.format(dataset_name, dataset_name)
-            path1 = '../../../../../biodata/{}/{}_pre.csv'.format(dataset_name, dataset_name)
-            data = pd.read_csv(path)
-            data1 = pd.read_csv(path1, header=None)
-            Total_label = np.array(data['x'])  # the label of each cell
-            Total_data = np.array(data1).astype(float)
-            cluster_name = np.unique(Total_label)
-            cluster_num = cluster_name.size
-            init_center_index = np.zeros(cluster_num, dtype=int)
-            for i in np.arange(cluster_num):  # label preprocessing
-                k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-                Total_label[k] = i
-                init_center_index[i] = k[0]
-            return Total_data, Total_label, init_center_index, cluster_num
-        elif dataset_name == 'Klein':
-            path = '../../../../../biodata/{}/{}_cell_label.csv'.format(dataset_name, dataset_name)
-            path1 = '../../../../../biodata/{}/T2000_expression.txt'.format(dataset_name)
-            data = pd.read_csv(path)
-            data1 = []
-            file = open(path1, 'r')  # 打开文件
-            file_data = file.readlines()  # 读取所有行
-            for row in file_data:
-                tmp_list = row.split('\t')  # 按‘，’切分每行的数据
-                # tmp_list[-1] = tmp_list[-1].replace('\n',',') #去掉换行符
-                data1.append(tmp_list)  # 将每行数据插入data中
-            data1 = np.array(data1)
-            data1 = np.delete(data1, 0, 0)
-            data1 = np.delete(data1, 0, 1)
-            # data1 = pd.read_csv(path1,header=None)
-            Total_label = np.array(data['Cluster']).astype(int)  # the label of each cell
-            Total_data = np.array(data1).astype(float).T
-            cluster_name = np.unique(Total_label)
-            cluster_num = cluster_name.size
-            init_center_index = np.zeros(cluster_num, dtype=int)
-            for i in np.arange(cluster_num):  # label preprocessing
-                k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-                Total_label[k] = i
-                init_center_index[i] = k[0]
-            return Total_data, Total_label, init_center_index, cluster_num
-        elif dataset_name == 'Bmcite':
-            path = '../../biodata/{}/{}_lable.csv'.format(dataset_name, dataset_name)
-            path1 = '../../biodata/{}/{}_count.csv'.format(dataset_name, dataset_name)
-            data = pd.read_csv(path)
-            data1 = pd.read_csv(path1)
-            Total_label = np.array(data['x'])  # the label of each cell
-            x1 = np.array(data1)
-            Total_data = np.delete(x1, 0, 1)
-            cluster_name = np.unique(Total_label)
-            cluster_num = cluster_name.size
-            init_center_index = np.zeros(cluster_num, dtype=int)
-            for i in np.arange(cluster_num):  # label preprocessing
-                k = np.array(np.where(Total_label == cluster_name[i])).reshape(-1)
-                Total_label[k] = i
-                init_center_index[i] = k[0]
-            return Total_data.T.astype(float), Total_label, init_center_index, cluster_num
-    distMat = distance.cdist(featureMatrix,featureMatrix, distanceType)
-    edgeList = np.zeros((featureMatrix.shape[0],featureMatrix.shape[0]), dtype=int)
-    for i in np.arange(distMat.shape[0]):
-        res = distMat[:,i].argsort()[:k]
-        edgeList[i,res] = 1
-    return edgeList
+
 
 def normalize_adj(adj, self_loop=True, symmetry=False):
     """
@@ -415,33 +109,33 @@ if __name__ == '__main__':
     # setup0
     # setup()
     opt.args.device = torch.device("cuda" if opt.args.cuda else "cpu")
-    args.name = 'Klein'#数据集名字
-    args.nk = 5#细胞的邻居
-    args.graph_k_save_path = './DCRN_pretrain/graph/{}{}_graph.txt'.format(args.name, args.nk)#细胞graph存储的路径
+    args.name = 'lawor'#dataset_num
+    args.nk = 5#the neighbor of cells
+    args.graph_k_save_path = './DCRN_pretrain/graph/{}{}_graph.txt'.format(args.name, args.nk)
     args.graph_save_path = './DCRN_pretrain/graph/{}_graph.txt'.format(args.name)
     # args.n_input = 10
-    torch.set_default_dtype(torch.float32)#设置tensor的数据类型float32
+    torch.set_default_dtype(torch.float32)
     # Bio_data
     #导入数据
-    X, label, init_center_index, cluster_num = bioDataload(args.name)#X是cell-RNA矩阵，label是类簇标签，init_center_index初始的类簇中心，cluster_num是类簇个数
-    # X = (X - np.min(X)) / (np.max(X) - np.min(X))  # 归一化
+    X, label, init_center_index, cluster_num = bioDataload(args.name)
+    # X = (X - np.min(X)) / (np.max(X) - np.min(X))  # normalization
     # args.n_input = X.shape[1]
     # args.n_components = X.shape[1]
     # args.n_z = X.shape[1]
     # args.gae_n_enc_3 = args.n_input
     # args.gae_n_dec_1 = args.n_input
-    y = label.astype(int)#cell的类簇标签转化成整数型
-    args.n_clusters = cluster_num#参数n_clusters设置为类簇个数
+    y = label.astype(int)
+    args.n_clusters = cluster_num
     construct_graph(args.graph_k_save_path, X, label, 'heat', topk=args.nk)
-    A = test_load_graph(args.nk, args.graph_k_save_path, args.graph_save_path, X).to(opt.args.device)#cell相似性矩阵
-    A = A.to_dense()#cell相似性矩阵转化成稠密形式
+    A = test_load_graph(args.nk, args.graph_k_save_path, args.graph_save_path, X).to(opt.args.device)
+    A = A.to_dense()
     A_norm = normalize_adj(A, self_loop=True, symmetry=True)
-    Ad = diffusion_adj(torch_to_numpy(A.detach().cpu()), mode="ppr", transport_rate=opt.args.alpha_value)#cell相似性矩阵的diffusion
+    Ad = diffusion_adj(torch_to_numpy(A.detach().cpu()), mode="ppr", transport_rate=opt.args.alpha_value)
     # pca = PCA(n_components=args.n_input)
     # X = pca.fit_transform(X)
     # to torch tensor
     # X = numpy_to_torch(X).to(opt.args.device)
-    ELM_hidden = [50,100, 200, 500, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
+    ELM_hidden = [50,100, 200, 500, 1000, 1500, 2000]
     # ELM_hidden = [1500]#换100, 200, 500, 1000, 1500, 2000
     elmacc = float('-inf')
     elmnmi = float('-inf')
@@ -449,7 +143,7 @@ if __name__ == '__main__':
     elmf1 = float('-inf')
     for h in ELM_hidden:
         H = ELM(X, n_hidden=h, active_fun='sigmod')
-        acc, nmi, ari, f1, centers = clustering(H, y, init_center_index)  # k-means聚类，centers是类簇中心
+        acc, nmi, ari, f1, centers = clustering(H, y, init_center_index)  
         if acc > elmacc:
             elmacc = acc
             best_Hidden = h
@@ -467,15 +161,15 @@ if __name__ == '__main__':
             best_f1_Hidden = h
             best_f1_H = H
     #ELM的L个数
-    args.n_input = best_ari_Hidden #修改，best_Hidden, best_nmi_Hidden, best_ari_Hidden, best_f1_Hidden
+    args.n_input = best_ari_Hidden #best_Hidden, best_nmi_Hidden, best_ari_Hidden, best_f1_Hidden
     print('Hidden numebr: {}'.format(best_ari_Hidden))
     args.n_components = args.n_input
     args.n_z = args.n_input
     args.epoch = 2000
     # H = ELM(X, n_hidden=args.n_input, active_fun='sigmod')
-    HX = best_ari_H.to(opt.args.device)  #修改 H(X) #best_H, best_nmi_H, best_ari_H, best_f1_H
+    HX = best_ari_H.to(opt.args.device)  # H(X) #best_H, best_nmi_H, best_ari_H, best_f1_H
     # A_norm = numpy_to_torch(A_norm, sparse=True).to(opt.args.device)
-    Ad = numpy_to_torch(Ad).to(opt.args.device)  # Ad传输到GPU 'cuda'
+    Ad = numpy_to_torch(Ad).to(opt.args.device)  
 
     # embeding_size = 2048
     embeding_size_set = [2048]#128,256,512,1024,2048,4096
@@ -490,31 +184,19 @@ if __name__ == '__main__':
     for embeding_size in embeding_size_set:
         print('embeding_size: {}'.format(embeding_size))
 
-        args.ae_n_enc_1 = embeding_size#AE的第一层encoding维度
-        args.ae_n_enc_2 = embeding_size#AE的第二层encoding维度
-        args.ae_n_enc_3 = embeding_size#AE的第二层encoding维度
-        args.ae_n_dec_1 = embeding_size#AE的第一层decoding维度
+        args.ae_n_enc_1 = embeding_size
+        args.ae_n_enc_2 = embeding_size
+        args.ae_n_enc_3 = embeding_size
+        args.ae_n_dec_1 = embeding_size
         args.ae_n_dec_2 = embeding_size
         args.ae_n_dec_3 = embeding_size
-        args.gae_n_enc_1 = embeding_size#IGAE的第一层encoding维度
+        args.gae_n_enc_1 = embeding_size
         args.gae_n_enc_2 = embeding_size
         args.gae_n_enc_3 = args.n_input
-        args.gae_n_dec_1 = args.n_input#IGAE的第一层decoding维度
+        args.gae_n_dec_1 = args.n_input
         args.gae_n_dec_2 = embeding_size
         args.gae_n_dec_3 = embeding_size
 
-
-        # # Dual Correlation Reduction Network
-        # model = DCRN(n_node=HX.shape[0]).to(opt.args.device)
-        # # deep graph clustering
-        # # acc, nmi, ari, f1 = train(model, X, y, torch_to_numpy(A.detach().cpu()), A_norm, Ad, init_center_index)
-        # acc, nmi, ari, f1 = ELM_train(model, HX, y, torch_to_numpy(A.detach().cpu()), A_norm, Ad, init_center_index)
-        # print("ACC: {:.4f},".format(acc), "NMI: {:.4f},".format(nmi), "ARI: {:.4f},".format(ari), "F1: {:.4f}".format(f1))
-        # cycle = 1  # the number of round
-
-        # for i in range(cycle):
-        # print("Round {}".format(i))
-        # Dual Correlation Reduction Network
         model = DCRN(n_node=HX.shape[0]).to(opt.args.device)
         # deep graph clustering
         acc, nmi, ari, f1 = ELM_train(model, HX, y, torch_to_numpy(A.detach().cpu()), A_norm, Ad, init_center_index)
