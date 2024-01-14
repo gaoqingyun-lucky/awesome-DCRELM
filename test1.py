@@ -118,12 +118,6 @@ if __name__ == '__main__':
     # Bio_data
     #导入数据
     X, label, init_center_index, cluster_num = bioDataload(args.name)
-    # X = (X - np.min(X)) / (np.max(X) - np.min(X))  # normalization
-    # args.n_input = X.shape[1]
-    # args.n_components = X.shape[1]
-    # args.n_z = X.shape[1]
-    # args.gae_n_enc_3 = args.n_input
-    # args.gae_n_dec_1 = args.n_input
     y = label.astype(int)
     args.n_clusters = cluster_num
     construct_graph(args.graph_k_save_path, X, label, 'heat', topk=args.nk)
@@ -131,10 +125,6 @@ if __name__ == '__main__':
     A = A.to_dense()
     A_norm = normalize_adj(A, self_loop=True, symmetry=True)
     Ad = diffusion_adj(torch_to_numpy(A.detach().cpu()), mode="ppr", transport_rate=opt.args.alpha_value)
-    # pca = PCA(n_components=args.n_input)
-    # X = pca.fit_transform(X)
-    # to torch tensor
-    # X = numpy_to_torch(X).to(opt.args.device)
     ELM_hidden = [50,100, 200, 500, 1000, 1500, 2000]
     # ELM_hidden = [1500]#换100, 200, 500, 1000, 1500, 2000
     elmacc = float('-inf')
@@ -171,8 +161,7 @@ if __name__ == '__main__':
     # A_norm = numpy_to_torch(A_norm, sparse=True).to(opt.args.device)
     Ad = numpy_to_torch(Ad).to(opt.args.device)  
 
-    # embeding_size = 2048
-    embeding_size_set = [2048]#128,256,512,1024,2048,4096
+    embeding_size_set = [128,256,512,1024,2048]
     accc = float('-inf')
     f11 = float('-inf')
     arii = float('-inf')
