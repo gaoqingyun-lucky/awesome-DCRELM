@@ -17,8 +17,8 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 def bioDataload(dataset_name):
     if dataset_name == 'lawlor':
-        path = '../../../biodata/{}/{}_lable.csv'.format(dataset_name,dataset_name)
-        path1 = '../../../biodata/{}/{}_count.csv'.format(dataset_name,dataset_name)
+        path = 'lawlor_lable.csv'.format(dataset_name,dataset_name)
+        path1 = 'lawlor_count.csv'.format(dataset_name,dataset_name)
         data = pd.read_csv(path)
         data1 = pd.read_csv(path1,header=None)
         Total_label = np.array(data['x']) # the label of each cell
