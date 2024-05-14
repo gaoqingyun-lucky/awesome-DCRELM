@@ -3,7 +3,7 @@ DCRELM: dual correlation reduction network-based extreme learning machine for si
 
 ## Datasets
 
-- **Lawlor**: The origin dataset can be found [here](https://drive.google.com/file/d/1q9JFksKYYBQRmc_cUQGquiGce7dY6zm3/view).
+- **Lawlor**: It can be found [here](https://drive.google.com/file/d/1q9JFksKYYBQRmc_cUQGquiGce7dY6zm3/view).
 
 ## Example to run the codes
 
