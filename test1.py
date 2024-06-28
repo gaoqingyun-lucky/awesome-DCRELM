@@ -4,10 +4,10 @@ from scipy.spatial import distance
 from utils import *
 import pandas as pd
 from opt import args
-from DCRN_pretrain.load_data import construct_graph,test_load_graph
+from load_data import construct_graph,test_load_graph
 from ELM_trainer import *
 # from torch.utils.data import Dataset
-from DCRN_pretrain.load_data import ELM
+from load_data import ELM
 import os
 import scipy.io
 from scipy.io import loadmat
